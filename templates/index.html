@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Price Prediction</title>
+</head>
+<body>
+    <h1>Stock Price Prediction</h1>
+
+    <div>
+        <button id="predict-button">Predict Next Day's Closing Price</button>
+        <p id="predicted-price">Predicted Price: <span id="predicted-value">-</span></p>
+    </div>
+
+    <script>
+        document.getElementById("predict-button").addEventListener("click", function () {
+            fetch("/predict")
+                .then(response => response.json())
+                .then(data => {
+                    const predictedValue = data.predicted_price;
+                    document.getElementById("predicted-value").textContent = `$${predictedValue}`;
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>
